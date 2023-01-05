@@ -1,0 +1,52 @@
+python3 -m venv venv
+
+source venv/bin/activate
+
+deactivate
+
+cmd + shift + P -> Python: Select Interpreter -> ./venv
+
+pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended
+
+touch __init__.py config.py run.py .flaskenv Dockerfile
+
+Install Docker Desktop application
+
+https://blog.logrocket.com/build-deploy-flask-app-using-docker/
+
+https://rest-apis-flask.teclado.com/docs/flask_smorest/reload_api_docker_container/#running-the-container-with-volumes-for-hot-reloading
+
+https://stackoverflow.com/a/63819488
+
+pip freeze > requirements.txt
+
+docker build -t flask-smorest-api .
+
+docker run -dp 5000:5000 -w /api -v "$(pwd):/api" flask-smorest-api
+
+docker ps
+
+docker restart <CONTAINER ID>
+
+docker restart 1c55c8b8a389
+
+
+https://github.com/tecladocode/rest-apis-flask-python
+
+https://www.udemy.com/course/rest-api-flask-and-python/learn/lecture/33781440#overview
+
+
+flask db_create
+
+flask db_drop
+
+flask db_seed
+
+
+cat api/.flaskenv
+FLASK_APP=run.py
+FLASK_DEBUG=1
+JWT_SECRET_KEY=<JWT_SECRET_KEY>
+
+
+touch .gitignore
