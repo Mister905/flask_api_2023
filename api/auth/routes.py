@@ -4,9 +4,11 @@ from flask import json, request, jsonify
 from api.models import User
 from api.schemas import UserSchema
 from api import db
-from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
+from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required, get_jwt
+from api.blocklist import BLOCKLIST
 
 user_schema = UserSchema()
+
 
 @bp.route("/api/auth/load_active_user", methods=["GET"])
 @jwt_required()
@@ -63,13 +65,26 @@ def login():
 
     else:
         access_token = create_access_token(identity=user.id, fresh=True)
+        refresh_token = create_refresh_token(user.id)
         user = db.session.query(*[c for c in User.__table__.c if c.name != "password_hash"]).filter_by(email=email).first()
         serialized_user = user_schema.dump(user)
         return jsonify({
             "success": 1,
             "access_token": access_token,
+            "refresh_token": refresh_token,
             "user": serialized_user
-        })  
+        })
+
+
+@bp.route("/api/auth/logout", methods=["POST"])
+@jwt_required()
+def logout():
+    jti = get_jwt()["jti"]
+    BLOCKLIST.add(jti)
+    return jsonify({
+        "success": 1,
+        "message": "Sucessfully logged out"
+    }), 200
 
 
 @bp.route("/api/auth/register", methods=["POST"])

@@ -1,3 +1,5 @@
+https://rest-apis-flask.teclado.com/
+
 python3 -m venv venv
 
 source venv/bin/activate
@@ -6,7 +8,7 @@ deactivate
 
 cmd + shift + P -> Python: Select Interpreter -> ./venv
 
-pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended
+pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended flask-migrate
 
 touch __init__.py config.py run.py .flaskenv Dockerfile
 
@@ -60,7 +62,6 @@ https://jwt.io/introduction
 
 
 
-
 JWT Secret Generator
 https://docs.python.org/3/library/secrets.html
 
@@ -70,3 +71,18 @@ python
 
 >>> secrets.SystemRandom().getrandbits(128)
 98401826142759308826507999794775708831
+
+
+Token refreshing with Flask-JWT-Extended
+https://rest-apis-flask.teclado.com/docs/flask_jwt_extended/token_refreshing_flask_jwt_extended/
+
+
+
+Database migrations with Alembic and Flask-Migrate
+https://rest-apis-flask.teclado.com/docs/flask_migrate/why_use_database_migrations/
+
+https://rest-apis-flask.teclado.com/docs/flask_migrate/change_models_generate_alembic_migration/
+
+flask db migrate -m "Updated item table schema"
+
+flask db upgrade

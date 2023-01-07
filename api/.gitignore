@@ -1,2 +1,12 @@
 .flaskenv
+app.db
+venv
+.vscode/
+*.pyc
+.idea/
 __pycache__/
+*.db
+.DS_Store
+venv/
+.venv/
+docs/docs/.nota/config.ini

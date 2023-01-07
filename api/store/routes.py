@@ -49,7 +49,7 @@ def get_store(id: int):
 
 
 @bp.route("/api/store", methods=["POST"])
-@jwt_required()
+@jwt_required(fresh=True)
 def create_store():
     
     name = request.json["name"]
@@ -139,6 +139,7 @@ def get_store_tags(id: int):
 
 
 @bp.route("/api/store/<int:id>/tag", methods=["POST"])
+@jwt_required(fresh=True)
 def create_store_tag(id= int):
     
     name = request.json["name"]
@@ -159,7 +160,7 @@ def create_store_tag(id= int):
 
 
 @bp.route("/api/store/<int:id>/item", methods=["POST"])
-@jwt_required()
+@jwt_required(fresh=True)
 def create_store_item(id=int):
     
     name = request.json["name"]

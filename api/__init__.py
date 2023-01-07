@@ -3,10 +3,13 @@ from api.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_jwt_extended.jwt_manager import JWTManager
+from flask_migrate import Migrate
+from api.blocklist import BLOCKLIST
 
 db = SQLAlchemy()
 ma = Marshmallow()
 jwt = JWTManager()
+migrate = Migrate()
 
 # Factory pattern
 def create_app():
@@ -20,6 +23,8 @@ def create_app():
     ma.init_app(app)
 
     jwt.init_app(app)
+
+    migrate.init_app(app, db)
 
     from api.store import bp as store_bp
     app.register_blueprint(store_bp)
@@ -56,6 +61,31 @@ def create_app():
                 {
                     "description": "Request does not contain an access token.",
                     "error": "authorization_required",
+                }
+            ),
+            401,
+        )
+
+    @jwt.token_in_blocklist_loader
+    def check_if_token_in_blocklist(jwt_header, jwt_payload):
+        return jwt_payload["jti"] in BLOCKLIST
+
+    @jwt.revoked_token_loader
+    def revoked_token_callback(jwt_header, jwt_payload):
+        return (
+            jsonify(
+                {"description": "The token has been revoked.", "error": "token_revoked"}
+            ),
+            401,
+        )
+    
+    @jwt.needs_fresh_token_loader
+    def token_not_fresh_callback(jwt_header, jwt_payload):
+        return (
+            jsonify(
+                {
+                    "description": "The token is not fresh.",
+                    "error": "fresh_token_required",
                 }
             ),
             401,
