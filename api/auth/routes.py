@@ -1,3 +1,5 @@
+import os
+import requests
 from flask_jwt_extended.utils import create_refresh_token
 from api.auth import bp
 from flask import json, request, jsonify
@@ -8,6 +10,17 @@ from flask_jwt_extended import create_access_token, create_refresh_token, get_jw
 from api.blocklist import BLOCKLIST
 
 user_schema = UserSchema()
+
+
+def send_simple_message(to, subject, body):
+
+    return requests.post(
+		f"https://api.mailgun.net/v3/{os.getenv('MAILGUN_DOMAIN')}/messages",
+		auth=("api", f"{os.getenv('MAILGUN_API_KEY')}"),
+		data={"from": f"Excited User <mailgun@{os.getenv('MAILGUN_DOMAIN')}>",
+			"to": [to],
+			"subject": subject,
+			"text": body})
 
 
 @bp.route("/api/auth/load_active_user", methods=["GET"])
@@ -73,7 +86,7 @@ def login():
             "access_token": access_token,
             "refresh_token": refresh_token,
             "user": serialized_user
-        })
+        }), 201
 
 
 @bp.route("/api/auth/logout", methods=["POST"])
@@ -94,7 +107,6 @@ def register():
     last_name = request.json["last_name"]
     email = request.json["email"]
     password = request.json["password"]
-    confirm_password = request.json["confirm_password"]
     
     if not email:
         return jsonify({
@@ -129,6 +141,12 @@ def register():
     db.session.add(user)
 
     db.session.commit()
+
+    send_simple_message(
+        to=user.email,
+        subject="User registration successful!",
+        body=f"Hi {user.first_name}! You have successfully registered!"
+    )
 
     return jsonify({
         "success": 1,

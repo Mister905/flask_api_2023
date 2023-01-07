@@ -8,7 +8,7 @@ deactivate
 
 cmd + shift + P -> Python: Select Interpreter -> ./venv
 
-pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended flask-migrate
+pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended flask-migrate requests
 
 touch __init__.py config.py run.py .flaskenv Dockerfile
 
@@ -22,9 +22,13 @@ https://stackoverflow.com/a/63819488
 
 pip freeze > requirements.txt
 
-docker build -t flask-smorest-api .
+^ Need to run after new pip installations
 
-docker run -dp 5000:5000 -w /api -v "$(pwd):/api" flask-smorest-api
+Docker image needs to be rebuilt after new pip installation packages are added to requirements.txt
+
+docker build -t udemy-flask-api .
+
+docker run -dp 5000:5000 -w /api -v "$(pwd):/api" udemy-flask-api
 
 docker ps
 
@@ -86,3 +90,15 @@ https://rest-apis-flask.teclado.com/docs/flask_migrate/change_models_generate_al
 flask db migrate -m "Updated item table schema"
 
 flask db upgrade
+
+
+
+
+Sending Emails with Mailgun
+https://www.udemy.com/course/rest-api-flask-and-python/learn/lecture/34471166
+
+Dashboard -> Sending -> API -> Python
+
+Add mailgun API key and mailgun domain values to .flaskenv
+
+Add test email address to Authorized Recipients
