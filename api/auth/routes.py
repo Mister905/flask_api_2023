@@ -8,11 +8,12 @@ from api.schemas import UserSchema
 from api import db
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required, get_jwt
 from api.blocklist import BLOCKLIST
+from api import render_template
 
 user_schema = UserSchema()
 
 
-def send_simple_message(to, subject, body):
+def send_simple_message(to, subject, body, html):
 
     return requests.post(
 		f"https://api.mailgun.net/v3/{os.getenv('MAILGUN_DOMAIN')}/messages",
@@ -20,7 +21,8 @@ def send_simple_message(to, subject, body):
 		data={"from": f"Excited User <mailgun@{os.getenv('MAILGUN_DOMAIN')}>",
 			"to": [to],
 			"subject": subject,
-			"text": body})
+			"text": body,
+            "html": html})
 
 
 @bp.route("/api/auth/load_active_user", methods=["GET"])
@@ -145,7 +147,8 @@ def register():
     send_simple_message(
         to=user.email,
         subject="User registration successful!",
-        body=f"Hi {user.first_name}! You have successfully registered!"
+        body=f"Hi {user.first_name}! You have successfully registered!",
+        html=render_template("action.html")
     )
 
     return jsonify({

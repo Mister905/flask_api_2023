@@ -5,11 +5,18 @@ from flask_marshmallow import Marshmallow
 from flask_jwt_extended.jwt_manager import JWTManager
 from flask_migrate import Migrate
 from api.blocklist import BLOCKLIST
+import jinja2
 
 db = SQLAlchemy()
 ma = Marshmallow()
 jwt = JWTManager()
 migrate = Migrate()
+
+template_loader = jinja2.FileSystemLoader("email_templates")
+template_env = jinja2.Environment(loader=template_loader)
+
+def render_template(template_filename, **context):
+    return template_env.get_template(template_filename).render(**context)
 
 # Factory pattern
 def create_app():
@@ -90,6 +97,7 @@ def create_app():
             ),
             401,
         )
+    
 
     @app.cli.command("db_seed")
     def db_seed():

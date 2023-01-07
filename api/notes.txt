@@ -8,7 +8,7 @@ deactivate
 
 cmd + shift + P -> Python: Select Interpreter -> ./venv
 
-pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended flask-migrate requests
+pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended flask-migrate requests jinja2
 
 touch __init__.py config.py run.py .flaskenv Dockerfile
 
@@ -102,3 +102,11 @@ Dashboard -> Sending -> API -> Python
 Add mailgun API key and mailgun domain values to .flaskenv
 
 Add test email address to Authorized Recipients
+
+
+Sending HTML emails with Mailgun
+https://rest-apis-flask.teclado.com/docs/task_queues_emails/sending_html_emails/
+
+Mailgun email templates
+https://github.com/mailgun/transactional-email-templates
+
