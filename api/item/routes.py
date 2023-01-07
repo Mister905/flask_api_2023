@@ -2,7 +2,7 @@ from flask import json, request, jsonify
 from api.item import bp
 from api.schemas import ItemSchema
 from api.models.item import Item
-from api import db
+from flask_jwt_extended import jwt_required
 
 
 item_schema = ItemSchema()
@@ -10,6 +10,7 @@ items_schema = ItemSchema(many=True)
 
 
 @bp.route("/api/item", methods=["GET"])
+@jwt_required()
 def get_items():
 
     items = Item.query.all()
@@ -22,6 +23,7 @@ def get_items():
 
 
 @bp.route("/api/item/<int:id>", methods=["GET"])
+@jwt_required()
 def get_item(id: int):
     
     item = Item.query.filter_by(id=id).first()

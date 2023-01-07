@@ -50,3 +50,23 @@ JWT_SECRET_KEY=<JWT_SECRET_KEY>
 
 
 touch .gitignore
+
+
+JWT
+
+https://rest-apis-flask.teclado.com/docs/flask_jwt_extended/what_is_a_jwt/
+
+https://jwt.io/introduction
+
+
+
+
+JWT Secret Generator
+https://docs.python.org/3/library/secrets.html
+
+python
+
+>>> import secrets
+
+>>> secrets.SystemRandom().getrandbits(128)
+98401826142759308826507999794775708831

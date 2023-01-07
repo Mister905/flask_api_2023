@@ -1,10 +1,11 @@
 from flask import json, request, jsonify
 from api.store import bp
-from api.schemas import StoreSchema, BasicTagSchema, BasicItemSchema
+from api.schemas import StoreSchema, BasicTagSchema, BasicItemSchema, TagAndItemSchema
 from api.models.store import Store
 from api.models.tag import Tag
 from api.models.item import Item
 from api import db
+from flask_jwt_extended import jwt_required
 
 
 store_schema = StoreSchema()
@@ -15,7 +16,10 @@ tags_schema = BasicTagSchema(many=True)
 
 item_schema = BasicItemSchema()
 
+tag_and_item_schema = TagAndItemSchema()
+
 @bp.route("/api/store", methods=["GET"])
+@jwt_required()
 def get_stores():
 
     stores = Store.query.all()
@@ -28,6 +32,7 @@ def get_stores():
 
 
 @bp.route("/api/store/<int:id>", methods=["GET"])
+@jwt_required()
 def get_store(id: int):
     
     store = Store.query.filter_by(id=id).first()
@@ -44,6 +49,7 @@ def get_store(id: int):
 
 
 @bp.route("/api/store", methods=["POST"])
+@jwt_required()
 def create_store():
     
     name = request.json["name"]
@@ -64,6 +70,7 @@ def create_store():
 
 
 @bp.route("/api/store/<int:id>", methods=["PUT"])
+@jwt_required()
 def update_store(id: int):
     
     store = Store.query.filter_by(id=id).first()
@@ -87,6 +94,7 @@ def update_store(id: int):
 
 
 @bp.route("/api/store/<int:id>", methods=["DELETE"])
+@jwt_required()
 def delete_store(id: int):
     
     store = Store.query.filter_by(id=id).first()
@@ -108,6 +116,7 @@ def delete_store(id: int):
 
 
 @bp.route("/api/store/<int:id>/tag", methods=["GET"])
+@jwt_required()
 def get_store_tags(id: int):
 
     store = Store.query.filter_by(id=id).first()
@@ -149,49 +158,8 @@ def create_store_tag(id= int):
     }), 201
 
 
-
-@bp.route("/api/tag/<int:id>", methods=["GET"])
-def get_tag(id: int):
-
-    tag = Tag.query.filter_by(id=id).first()
-
-    if tag:
-
-        serialized_tag = tag_schema.dump(tag)
-
-        return jsonify({
-            "tag": serialized_tag
-        })
-    
-    else:
-        return jsonify({
-            "error": 1,
-            "message": "Tag not found"
-        }), 404
-
-
-@bp.route("/api/tag/<int:id>", methods=["DELETE"])
-def delete_tag(id: int):
-    
-    tag = Tag.query.filter_by(id=id).first()
-    
-    if tag:
-        db.session.delete(tag)
-        db.session.commit()
-
-        return jsonify({
-            "success": 1,
-            "message": "Tag deletion successful"
-        }), 202
-
-    else:
-        return jsonify({
-            "error": 1,
-            "message": "Tag not found."
-        }), 404
-
-
 @bp.route("/api/store/<int:id>/item", methods=["POST"])
+@jwt_required()
 def create_store_item(id=int):
     
     name = request.json["name"]

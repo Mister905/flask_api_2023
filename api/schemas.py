@@ -36,6 +36,19 @@ class StoreSchema(BasicStoreSchema):
 
 class TagSchema(BasicTagSchema):
     store_id = fields.Int(load_only=True)
-    items = fields.List(fields.Nested(BasicItemSchema()), dump_only=True)
     store = fields.Nested(BasicStoreSchema(), dump_only=True)
-    
+    items = fields.List(fields.Nested(BasicItemSchema()), dump_only=True)
+
+
+class TagAndItemSchema(ma.Schema):
+    message = fields.Str()
+    item = fields.Nested(ItemSchema)
+    tag = fields.Nested(TagSchema)
+
+
+class UserSchema(ma.Schema):
+    id = fields.Int()
+    first_name = fields.String()
+    last_name = fields.String()
+    email = fields.Email()
+    password_hash = fields.String()

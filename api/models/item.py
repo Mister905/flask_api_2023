@@ -8,3 +8,4 @@ class Item(db.Model):
     price = db.Column(db.Float(precision=2), unique=False, nullable=False)
     store_id = db.Column(db.Integer, db.ForeignKey("stores.id"), unique=False, nullable=False)
     store = db.relationship("Store", back_populates="items")
+    tags = db.relationship("Tag", back_populates="items", secondary="items_tags")
