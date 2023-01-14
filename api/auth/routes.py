@@ -78,6 +78,12 @@ def login():
             "message": "Login unsuccessful."
         })
 
+    elif not user.activated:
+        return jsonify({
+            "error": 1,
+            "message": "Account activation is required to login. Please check your email for an activation email"
+        })
+
     else:
         access_token = create_access_token(identity=user.id, fresh=True)
         refresh_token = create_refresh_token(user.id)
@@ -167,3 +173,15 @@ def get_refresh_token():
         "success": 1,
         "refresh_token": refresh_token
     }), 200
+
+
+@bp.route("/api/auth/activate/<int:user_id>", methods=["GET"])
+def activate(user_id: int):
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+        user.activated = 1
+        db.session.commit()
+        return jsonify({
+            "success": 1,
+            "message": "User successfully activated."
+        }), 200

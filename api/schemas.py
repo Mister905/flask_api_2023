@@ -52,3 +52,4 @@ class UserSchema(ma.Schema):
     last_name = fields.String()
     email = fields.Email()
     password_hash = fields.String()
+    activated = fields.Bool()
