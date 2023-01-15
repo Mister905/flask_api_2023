@@ -1,9 +1,9 @@
 import {
-  DISPLAY_MODAL,
   LOGIN_SUCCESS,
   USER_LOADED,
   LOGOUT,
   AUTH_ERROR,
+  USER_ACTIVATED,
 } from "./types";
 
 import instance from "../utils/axios";
@@ -17,6 +17,7 @@ export const load_active_user = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: AUTH_ERROR,
     });
@@ -36,14 +37,7 @@ export const login_user = (form_data, navigate) => async (dispatch) => {
     const res = await instance.post("/auth/login", request_body, config);
 
     if (res.data.error) {
-      dispatch({
-        type: DISPLAY_MODAL,
-        payload: {
-          modal_title: "Error",
-          modal_body: "Unable to login",
-          modal_confirmation: "Ok",
-        },
-      });
+      console.log(res.data.message);
     } else {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -53,14 +47,7 @@ export const login_user = (form_data, navigate) => async (dispatch) => {
       navigate("/main");
     }
   } catch (error) {
-    dispatch({
-      type: DISPLAY_MODAL,
-      payload: {
-        modal_title: "Error",
-        modal_body: "Unable to login",
-        modal_confirmation: "Ok",
-      },
-    });
+    console.log(error);
   }
 };
 
@@ -77,38 +64,43 @@ export const register_user = (form_data, navigate) => async (dispatch) => {
     const res = await instance.post("/auth/register", request_body, config);
 
     if (res.data.error) {
-      dispatch({
-        type: DISPLAY_MODAL,
-        payload: {
-          modal_title: "Error",
-          modal_body: res.data.message,
-          modal_confirmation: "Ok",
-        },
-      });
+      console.log(res.data.message);
     } else {
       navigate("/login");
-      dispatch({
-        type: DISPLAY_MODAL,
-        payload: {
-          modal_title: "Success",
-          modal_body: res.data.message,
-          modal_confirmation: "Ok",
-        },
-      });
     }
   } catch (error) {
-    dispatch({
-      type: DISPLAY_MODAL,
-      payload: {
-        modal_title: "Error",
-        modal_body: "Unable to complete registration",
-        modal_confirmation: "Ok",
-      },
-    });
+    console.log(error);
   }
 };
+
+// export const logout_user = (navigate) => async (dispatch) => {
+//   try {
+//     const res = await instance.post("/auth/logout");
+
+//     if (res.data.error) {
+//       console.log(res.data.error);
+//     } else {
+//       dispatch({ type: LOGOUT });
+//       navigate("/");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const logout_user = (navigate) => async (dispatch) => {
   dispatch({ type: LOGOUT });
   navigate("/");
+};
+
+export const activate_user = (user_id) => async (dispatch) => {
+  try {
+    const res = await instance.get(`/auth/activate/${user_id}`);
+
+    dispatch({
+      type: USER_ACTIVATED,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

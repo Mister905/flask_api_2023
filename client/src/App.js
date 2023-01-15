@@ -10,6 +10,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Public_Route from "./components/Routing/Public_Route";
 import Private_Route from "./components/Routing/Private_Route";
+import Activate from "./components/Activate";
 // Actions
 import { load_active_user } from "./actions/auth";
 
@@ -32,6 +33,15 @@ function App() {
           element={
             <Public_Route>
               <Landing />
+            </Public_Route>
+          }
+        />
+
+        <Route
+          path="/activate/:user_id"
+          element={
+            <Public_Route>
+              <Activate />
             </Public_Route>
           }
         />

@@ -236,6 +236,18 @@
                             mso-line-height-rule: exactly;
                             line-height: 24px;
                             font-family: Arial, sans-serif;
+                          "
+                        >
+                          Your account with email {{ email }} has been created
+                          successfully.
+                        </p>
+                        <p
+                          style="
+                            color: #000000;
+                            font-size: 16px;
+                            mso-line-height-rule: exactly;
+                            line-height: 24px;
+                            font-family: Arial, sans-serif;
                             margin-top: 0 !important;
                           "
                         >
@@ -251,19 +263,8 @@
                             font-family: Arial, sans-serif;
                           "
                         >
-                        Your account with email {{ email }} has been created successfully.
-                        </p>
-                        <p
-                          style="
-                            color: #000000;
-                            font-size: 16px;
-                            mso-line-height-rule: exactly;
-                            line-height: 24px;
-                            font-family: Arial, sans-serif;
-                          "
-                        >
                           <a
-                            href="http://www.mailgun.com/"
+                            href="http://localhost:3000/activate/{{user_id}}"
                             style="
                               font-size: 16px;
                               mso-line-height-rule: exactly;
@@ -276,62 +277,9 @@
                             >Confirm email&nbsp;address</a
                           >
                         </p>
-                        <p
-                          style="
-                            color: #000000;
-                            font-size: 16px;
-                            mso-line-height-rule: exactly;
-                            line-height: 24px;
-                            font-family: Arial, sans-serif;
-                            margin-bottom: 0 !important;
-                          "
-                        >
-                          &mdash; The&nbsp;Mailgunners
-                        </p>
                       </td>
                     </tr>
                   </table>
-                </td>
-              </tr>
-            </table>
-            <table
-              align="center"
-              role="presentation"
-              border="0"
-              cellpadding="0"
-              cellspacing="0"
-              width="600"
-              style="border-collapse: collapse; max-width: 600px; width: 100%"
-            >
-              <tr style="vertical-align: middle" valign="middle">
-                <td align="center" style="padding-top: 30px">
-                  <p
-                    style="
-                      mso-line-height-rule: exactly;
-                      line-height: 24px;
-                      font-family: Arial, sans-serif;
-                      font-size: 14px;
-                      color: #999;
-                      margin-top: 0 !important;
-                      margin-bottom: 0 !important;
-                    "
-                  >
-                    Follow
-                    <a
-                      href="http://twitter.com/mail_gun"
-                      style="
-                        mso-line-height-rule: exactly;
-                        line-height: 24px;
-                        font-family: Arial, sans-serif;
-                        text-decoration: underline;
-                        font-weight: bold;
-                        font-size: 14px;
-                        color: #999;
-                      "
-                      >@Mail_Gun</a
-                    >
-                    on&nbsp;Twitter.
-                  </p>
                 </td>
               </tr>
             </table>

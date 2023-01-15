@@ -1,10 +1,4 @@
-import {
-  LOGIN_SUCCESS,
-  LOGOUT,
-  USER_LOADED,
-  GET_ABOUT,
-  UPDATE_ABOUT,
-} from "../actions/types";
+import { LOGIN_SUCCESS, LOGOUT, USER_LOADED } from "../actions/types";
 
 const initial_state = {
   access_token: localStorage.getItem("token"),
@@ -12,7 +6,6 @@ const initial_state = {
   loading_user: true,
   loading_about: true,
   user: null,
-  is_activated: false
 };
 
 export default function (state = initial_state, action) {
