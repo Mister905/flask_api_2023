@@ -77,10 +77,7 @@ function Login() {
       <div className="row registration-row">
         <div className="col m12">
           <div className="center-align">
-            New User?
-            <Link to={"/register"} className="register-today">
-              Register Today
-            </Link>
+            New User? <Link to={"/register"} className="register-today">Register Today</Link>
           </div>
         </div>
       </div>

@@ -17,7 +17,6 @@ export const load_active_user = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: AUTH_ERROR,
     });
@@ -72,21 +71,6 @@ export const register_user = (form_data, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
-
-// export const logout_user = (navigate) => async (dispatch) => {
-//   try {
-//     const res = await instance.post("/auth/logout");
-
-//     if (res.data.error) {
-//       console.log(res.data.error);
-//     } else {
-//       dispatch({ type: LOGOUT });
-//       navigate("/");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const logout_user = (navigate) => async (dispatch) => {
   dispatch({ type: LOGOUT });

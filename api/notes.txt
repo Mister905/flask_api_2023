@@ -6,7 +6,7 @@ source venv/bin/activate
 
 deactivate
 
-cmd + shift + P -> Python: Select Interpreter -> ./venv
+cmd + shift + P -> Python: Select Interpreter -> .//venv/bin/python3
 
 pip install flask python-dotenv flask-smorest sqlalchemy flask-sqlalchemy flask-marshmallow marshmallow-sqlalchemy flask-jwt-extended flask-migrate requests jinja2
 
@@ -110,3 +110,11 @@ https://rest-apis-flask.teclado.com/docs/task_queues_emails/sending_html_emails/
 Mailgun email templates
 https://github.com/mailgun/transactional-email-templates
 
+
+
+
+
+
+Image Upload
+
+pip install Flask-Uploads
