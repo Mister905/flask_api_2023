@@ -11,6 +11,9 @@ import Login from "./components/Login";
 import Public_Route from "./components/Routing/Public_Route";
 import Private_Route from "./components/Routing/Private_Route";
 import Activate from "./components/Activate";
+import Image_Upload from "./components/Image_Upload";
+import Image_Gallery from "./components/Image_Gallery";
+
 // Actions
 import { load_active_user } from "./actions/auth";
 
@@ -69,6 +72,24 @@ function App() {
           element={
             <Private_Route>
               <Home />
+            </Private_Route>
+          }
+        />
+
+        <Route
+          path="/image-upload"
+          element={
+            <Private_Route>
+              <Image_Upload />
+            </Private_Route>
+          }
+        />
+
+        <Route
+          path="/image-gallery"
+          element={
+            <Private_Route>
+              <Image_Gallery />
             </Private_Route>
           }
         />

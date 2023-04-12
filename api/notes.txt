@@ -117,4 +117,36 @@ https://github.com/mailgun/transactional-email-templates
 
 Image Upload
 
-pip install Flask-Uploads
+
+yarn add react-dropzone
+
+https://codesandbox.io/s/react-dropzone-upload-gi4bd
+
+https://www.youtube.com/watch?v=hO85tWDctIk&ab_channel=MoodyCodes
+
+https://github.com/moodyomar/youtube-files/blob/master/drag-drop-react/src/App.js
+
+https://stackoverflow.com/questions/56025690/how-to-remove-file-from-react-dropzone
+
+https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask/page/0#comments
+
+https://www.twilio.com/blog/media-file-storage-python-flask-amazon-s3-buckets
+
+
+pip install boto3 awscli
+
+AWS' SDK for Python, known as Boto3, provides high-level access to AWS services such as S3.
+
+The awscli package is used to gain access to Amazon Web Services from the command line.
+
+
+
+cd api
+
+❯ aws configure
+AWS Access Key ID [None]: ##########################
+AWS Secret Access Key [None]: ###################################
+Default region name [None]: us-east-2
+Default output format [None]: 
+
+

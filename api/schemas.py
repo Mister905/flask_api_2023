@@ -1,5 +1,6 @@
 from api import ma
 from marshmallow import fields
+from werkzeug.datastructures import FileStorage
 
 
 class BasicItemSchema(ma.Schema):
@@ -17,7 +18,7 @@ class BasicTagSchema(ma.Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str(required=True)
 
-
+# Inherits the BasicItemSchema class
 class ItemSchema(BasicItemSchema):
     store_id = fields.Int(required=True, load_only=True)
     store = fields.Nested(BasicStoreSchema(), dump_only=True)

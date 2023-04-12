@@ -3,3 +3,4 @@ export const LOGOUT = "LOGOUT";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const USER_ACTIVATED = "USER_ACTIVATED";
+export const IMAGES_LOADED = "IMAGES_LOADED";

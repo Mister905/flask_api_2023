@@ -9,7 +9,6 @@ flask-marshmallow==0.14.0
 Flask-Migrate==4.0.1
 flask-smorest==0.40.0
 Flask-SQLAlchemy==3.0.2
-Flask-Uploads==0.2.1
 greenlet==2.0.1
 idna==3.4
 itsdangerous==2.1.2

@@ -5,6 +5,7 @@ from flask_marshmallow import Marshmallow
 from flask_jwt_extended.jwt_manager import JWTManager
 from flask_migrate import Migrate
 from api.blocklist import BLOCKLIST
+
 import jinja2
 
 db = SQLAlchemy()
@@ -44,6 +45,10 @@ def create_app():
 
     from api.auth import bp as auth_bp
     app.register_blueprint(auth_bp)
+
+    from api.image import bp as image_bp
+    app.register_blueprint(image_bp)
+
 
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_payload):

@@ -30,8 +30,6 @@ def send_simple_message(to, subject, body, html):
 def load_active_user():
     
     current_user_id = get_jwt_identity()
-
-    print(current_user_id)
     
     user = db.session.query(*[c for c in User.__table__.c if c.name != "password_hash"]).filter_by(id=current_user_id).first()
     

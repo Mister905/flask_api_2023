@@ -31,6 +31,16 @@ function Home() {
                   </Link>
                 </li>
                 <li>
+                  <Link to={"/image-upload"}>
+                    Image Upload
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/image-gallery"}>
+                    Image Gallery
+                  </Link>
+                </li>
+                <li>
                   <a onClick={handle_logout}>
                     Logout
                   </a>
